@@ -157,6 +157,7 @@ def follow(username):
         flash('你已经关注该用户了')
         return redirect(url_for('.user',username=username))
     current_user.follow(user)
+    db.session.commit()
     flash('你正在关注用户%s' % username)
     return redirect(url_for('.user', username=username))
 
@@ -173,5 +174,6 @@ def unfollow(username):
         flash('你没有关注该用户了')
         return redirect(url_for('.user',username=username))
     current_user.unfollow(user)
+    db.session.commit()
     flash('你取消了关注用户%s' % username)
     return redirect(url_for('.user', username=username))
